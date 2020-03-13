@@ -3,6 +3,8 @@ package com.devnanuvem.foodlist;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +22,9 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        List<String> listaComidas = new ArrayList<>(Arrays.asList("Lasanha", "Bife à cavalo", "Macarronada"));
+        List<String> foodList = new ArrayList<>(Arrays.asList("Lasanha", "Bife à cavalo", "Macarronada", "Parmegianna"));
+        ListView foodListView = findViewById(R.id.activity_main_food_list_view);
 
-        TextView comida1 = findViewById(R.id.textView);
-        TextView comida2 = findViewById(R.id.textView1);
-        TextView comida3 = findViewById(R.id.textView2);
-
-        comida1.setText(listaComidas.get(0));
-        comida2.setText(listaComidas.get(1));
-        comida3.setText(listaComidas.get(2));
+        foodListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foodList ));
     }
 }
