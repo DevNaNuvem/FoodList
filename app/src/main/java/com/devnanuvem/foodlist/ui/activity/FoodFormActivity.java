@@ -12,5 +12,6 @@ public class FoodFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_form);
+        setTitle("Adicionar Comida");
     }
 }
