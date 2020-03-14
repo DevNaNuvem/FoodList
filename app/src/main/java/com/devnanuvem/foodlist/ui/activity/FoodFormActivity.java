@@ -2,6 +2,7 @@ package com.devnanuvem.foodlist.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.devnanuvem.foodlist.R;
+import com.devnanuvem.foodlist.dao.RecipeDAO;
 import com.devnanuvem.foodlist.model.Recipe;
 
 public class FoodFormActivity extends AppCompatActivity {
@@ -18,6 +20,8 @@ public class FoodFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_form);
         setTitle("Adicionar Comida");
+
+        final RecipeDAO recipeDAO = new RecipeDAO();
 
         Button saveButton = findViewById(R.id.activity_food_form_save_button);
 
@@ -36,11 +40,9 @@ public class FoodFormActivity extends AppCompatActivity {
 
                 Recipe recipe = new Recipe(foodName, foodNumberOfIngredients, foodNumberOfSteps);
 
-                Toast.makeText(FoodFormActivity.this,
-                        recipe.getFoodName() + " - "
-                                + recipe.getFoodNumberOfIngredients() + " - "
-                                + recipe.getFoodNumberOfSteps(),
-                        Toast.LENGTH_LONG).show();
+                recipeDAO.saveRecipe(recipe);
+
+                startActivity(new Intent(FoodFormActivity.this, FoodListActivity.class));
 
             }
         });

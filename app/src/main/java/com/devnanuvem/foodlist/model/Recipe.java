@@ -11,15 +11,8 @@ public class Recipe {
         this.foodNumberOfSteps = foodNumberOfSteps;
     }
 
-    public String getFoodName() {
+    @Override
+    public String toString() {
         return foodName;
-    }
-
-    public String getFoodNumberOfIngredients() {
-        return foodNumberOfIngredients;
-    }
-
-    public String getFoodNumberOfSteps() {
-        return foodNumberOfSteps;
     }
 }

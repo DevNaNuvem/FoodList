@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devnanuvem.foodlist.R;
+import com.devnanuvem.foodlist.dao.RecipeDAO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,9 +23,10 @@ public class FoodListActivity extends AppCompatActivity {
         setContentView(R.layout.food_list_activity);
         setTitle("Lista de comidas");
 
-        List<String> foodList = new ArrayList<>(Arrays.asList("Lasanha", "Bife à cavalo", "Macarronada", "Parmegianna"));
+        RecipeDAO recipeDAO = new RecipeDAO();
+
         ListView foodListView = findViewById(R.id.activity_food_list_listview);
 
-        foodListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foodList));
+        foodListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeDAO.all()));
     }
 }
