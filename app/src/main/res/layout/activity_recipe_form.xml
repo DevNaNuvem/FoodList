@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/activity_food_form_name"
+        android:id="@+id/activity_recipe_form_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -15,7 +15,7 @@
         ></EditText>
 
     <EditText
-        android:id="@+id/activity_food_form_number_of_ingredients"
+        android:id="@+id/activity_recipe_form_number_of_ingredients"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -24,7 +24,7 @@
         ></EditText>
 
     <EditText
-        android:id="@+id/activity_food_form_number_of_steps"
+        android:id="@+id/activity_recipe_form_number_of_steps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -33,7 +33,7 @@
         ></EditText>
 
     <Button
-        android:id="@+id/activity_food_form_save_button"
+        android:id="@+id/activity_recipe_form_save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Salvar"

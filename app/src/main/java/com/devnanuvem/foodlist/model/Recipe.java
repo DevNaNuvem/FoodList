@@ -1,18 +1,18 @@
 package com.devnanuvem.foodlist.model;
 
 public class Recipe {
-    private final String foodName;
-    private final String foodNumberOfIngredients;
-    private final String foodNumberOfSteps;
+    private final String recipeName;
+    private final String recipeNumberOfIngredients;
+    private final String recipeNumberOfSteps;
 
-    public Recipe(String foodName, String foodNumberOfIngredients, String foodNumberOfSteps) {
-        this.foodName = foodName;
-        this.foodNumberOfIngredients = foodNumberOfIngredients;
-        this.foodNumberOfSteps = foodNumberOfSteps;
+    public Recipe(String recipeName, String recipeNumberOfIngredients, String recipeNumberOfSteps) {
+        this.recipeName = recipeName;
+        this.recipeNumberOfIngredients = recipeNumberOfIngredients;
+        this.recipeNumberOfSteps = recipeNumberOfSteps;
     }
 
     @Override
     public String toString() {
-        return foodName;
+        return recipeName;
     }
 }

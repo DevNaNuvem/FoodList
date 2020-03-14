@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/activity_food_list_fab_new_food"
+        android:id="@+id/activity_recipe_list_fab_new_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -13,10 +13,10 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_action_add_food" />
+        android:src="@drawable/ic_action_add_recipe" />
 
     <ListView
-        android:id="@+id/activity_food_list_listview"
+        android:id="@+id/activity_recipe_list_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
