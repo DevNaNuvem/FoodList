@@ -1,5 +1,7 @@
 package com.devnanuvem.foodlist.model;
 
+import androidx.annotation.NonNull;
+
 public class Recipe {
     private final String recipeName;
     private final String recipeNumberOfIngredients;
@@ -11,6 +13,7 @@ public class Recipe {
         this.recipeNumberOfSteps = recipeNumberOfSteps;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return recipeName;
