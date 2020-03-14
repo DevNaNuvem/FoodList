@@ -15,29 +15,43 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class RecipeListActivity extends AppCompatActivity {
 
+    public static final String APP_BAR_TITLE = "Lista de receitas";
+    private final RecipeDAO recipeDAO = new RecipeDAO();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.recipe_list_activity);
-        setTitle("Lista de receitas");
+        setTitle(APP_BAR_TITLE);
 
+        newRecipeFABSetting();
+
+    }
+
+    private void newRecipeFABSetting() {
         FloatingActionButton newRecipeButton = findViewById(R.id.activity_recipe_list_fab_new_recipe);
         newRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RecipeListActivity.this, RecipeFormActivity.class));
+                openFormActivity();
             }
         });
+    }
 
+    private void openFormActivity() {
+        startActivity(new Intent(this,
+                RecipeFormActivity.class));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        RecipeDAO recipeDAO = new RecipeDAO();
+        listSetting();
+    }
 
+    private void listSetting() {
         ListView recipeListView = findViewById(R.id.activity_recipe_list_listview);
 
         recipeListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipeDAO.all()));
