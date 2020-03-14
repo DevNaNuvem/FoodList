@@ -24,11 +24,14 @@ public class RecipeFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_form);
         setTitle(APP_BAR_TITLE);
-
         initializingFields();
 
         saveButtonSetting();
 
+        Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        recipeNameField.setText(recipe.getRecipeName());
+        recipeNumberOfIngredientsField.setText(recipe.getRecipeNumberOfIngredients());
+        recipeNumberOfStepsField.setText(recipe.getRecipeNumberOfSteps());
     }
 
     private void saveButtonSetting() {
@@ -49,6 +52,8 @@ public class RecipeFormActivity extends AppCompatActivity {
         recipeNameField = findViewById(R.id.activity_recipe_form_name);
         recipeNumberOfIngredientsField = findViewById(R.id.activity_recipe_form_number_of_ingredients);
         recipeNumberOfStepsField = findViewById(R.id.activity_recipe_form_number_of_steps);
+
+
     }
 
     private void saveRecipe(Recipe recipe) {
