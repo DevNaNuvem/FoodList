@@ -1,12 +1,8 @@
 package com.devnanuvem.foodlist;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +23,6 @@ public class MainActivity extends AppCompatActivity {
         List<String> foodList = new ArrayList<>(Arrays.asList("Lasanha", "Bife à cavalo", "Macarronada", "Parmegianna"));
         ListView foodListView = findViewById(R.id.activity_main_food_list_view);
 
-        foodListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foodList ));
+        foodListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foodList));
     }
 }
