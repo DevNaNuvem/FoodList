@@ -17,6 +17,9 @@ public class Recipe implements Serializable {
         this.id = id;
     }
 
+    public Recipe() {
+    }
+
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
     }
@@ -53,5 +56,10 @@ public class Recipe implements Serializable {
 
     public int getId() {
         return this.id;
+    }
+
+    public boolean hasValidId() {
+        return id > 0;
+
     }
 }
