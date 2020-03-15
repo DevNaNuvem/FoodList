@@ -12,9 +12,12 @@ import com.devnanuvem.foodlist.R;
 import com.devnanuvem.foodlist.dao.RecipeDAO;
 import com.devnanuvem.foodlist.model.Recipe;
 
+import static com.devnanuvem.foodlist.ui.activity.ActivitiesConstants.RECIPE_KEY;
+
 public class RecipeFormActivity extends AppCompatActivity {
 
-    public static final String APP_BAR_TITLE = "Nova Receita";
+    public static final String APP_BAR_TITLE_NEW_RECIPE = "Nova Receita";
+    public static final String APP_BAR_TITLE_EDIT_RECIPE = "Editar Receita";
     private EditText recipeNameField;
     private EditText recipeNumberOfIngredientsField;
     private EditText recipeNumberOfStepsField;
@@ -25,49 +28,61 @@ public class RecipeFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_form);
-        setTitle(APP_BAR_TITLE);
-        initializingFields();
+        bindFields();
 
-        saveButtonSetting();
+        configureSaveButton();
 
+        loadRecipe();
+    }
+
+    private void loadRecipe() {
         Intent intent = getIntent();
-        if (intent.hasExtra("recipe")){
-            recipe = (Recipe) intent.getSerializableExtra("recipe");
-            recipeNameField.setText(recipe.getRecipeName());
-            recipeNumberOfIngredientsField.setText(recipe.getRecipeNumberOfIngredients());
-            recipeNumberOfStepsField.setText(recipe.getRecipeNumberOfSteps());
+        if (intent.hasExtra(RECIPE_KEY)) {
+            recipe = (Recipe) intent.getSerializableExtra(RECIPE_KEY);
+            setTitle(APP_BAR_TITLE_EDIT_RECIPE);
+            if (recipe != null) {
+                fillFieldsForEdit();
+            }
         } else {
             recipe = new Recipe();
+            setTitle(APP_BAR_TITLE_NEW_RECIPE);
         }
     }
 
-    private void saveButtonSetting() {
+    private void fillFieldsForEdit() {
+        recipeNameField.setText(recipe.getRecipeName());
+        recipeNumberOfIngredientsField.setText(recipe.getRecipeNumberOfIngredients());
+        recipeNumberOfStepsField.setText(recipe.getRecipeNumberOfSteps());
+    }
+
+    private void configureSaveButton() {
         Button saveButton = findViewById(R.id.activity_recipe_form_save_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        fillRecipeForm();
-        if(recipe.hasValidId()){
+                finishForm();
+            }
+        });
+    }
+
+    private void finishForm() {
+        fillRecipeWithFormData();
+        if (recipe.hasValidId()) {
             recipeDAO.editRecipe(recipe);
         } else {
             recipeDAO.saveRecipe(recipe);
         }
         finish();
-
-
-            }
-        });
     }
 
-    private void initializingFields() {
+    private void bindFields() {
         recipeNameField = findViewById(R.id.activity_recipe_form_name);
         recipeNumberOfIngredientsField = findViewById(R.id.activity_recipe_form_number_of_ingredients);
         recipeNumberOfStepsField = findViewById(R.id.activity_recipe_form_number_of_steps);
 
-
     }
 
-    private void fillRecipeForm() {
+    private void fillRecipeWithFormData() {
         String recipeName = recipeNameField.getText().toString();
         String recipeNumberOfIngredients = recipeNumberOfIngredientsField.getText().toString();
         String recipeNumberOfSteps = recipeNumberOfStepsField.getText().toString();

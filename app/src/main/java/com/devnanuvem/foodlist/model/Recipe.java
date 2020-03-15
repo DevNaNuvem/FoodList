@@ -32,6 +32,7 @@ public class Recipe implements Serializable {
         this.recipeNumberOfSteps = recipeNumberOfSteps;
     }
 
+    @NonNull
     public String getRecipeName() {
         return recipeName;
     }

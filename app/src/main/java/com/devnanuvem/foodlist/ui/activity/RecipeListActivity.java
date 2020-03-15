@@ -2,7 +2,6 @@ package com.devnanuvem.foodlist.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +17,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import static com.devnanuvem.foodlist.ui.activity.ActivitiesConstants.RECIPE_KEY;
+
 public class RecipeListActivity extends AppCompatActivity {
 
     public static final String APP_BAR_TITLE = "Lista de receitas";
@@ -30,9 +31,9 @@ public class RecipeListActivity extends AppCompatActivity {
         setContentView(R.layout.recipe_list_activity);
         setTitle(APP_BAR_TITLE);
 
-        recipeDAO.saveRecipe( new Recipe("Ovos Mexidos", "1", "1"));
-        recipeDAO.saveRecipe( new Recipe("Ovos Cozidos", "1", "1"));
-        recipeDAO.saveRecipe( new Recipe("Ovos Fritos", "1", "1"));
+        recipeDAO.saveRecipe(new Recipe("Ovos Mexidos", "1", "1"));
+        recipeDAO.saveRecipe(new Recipe("Ovos Cozidos", "1", "1"));
+        recipeDAO.saveRecipe(new Recipe("Ovos Fritos", "1", "1"));
 
         newRecipeFABSetting();
 
@@ -43,12 +44,12 @@ public class RecipeListActivity extends AppCompatActivity {
         newRecipeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFormActivity();
+                openCreationForm();
             }
         });
     }
 
-    private void openFormActivity() {
+    private void openCreationForm() {
         startActivity(new Intent(this,
                 RecipeFormActivity.class));
     }
@@ -57,26 +58,37 @@ public class RecipeListActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        listSetting();
+        configureList();
     }
 
-    private void listSetting() {
+    private void configureList() {
         ListView recipeListView = findViewById(R.id.activity_recipe_list_listview);
 
         final List<Recipe> recipes = recipeDAO.all();
-        recipeListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipes));
+        configureAdapter(recipeListView, recipes);
 
+        configureOnItemClickListener(recipeListView);
+
+    }
+
+    private void configureOnItemClickListener(ListView recipeListView) {
         recipeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.i("Recipe: ", "" + position);
-                Recipe selectedRecipe = recipes.get(position);
-                Intent goToRecipeFormActivity = new Intent(RecipeListActivity.this, RecipeFormActivity.class);
-                goToRecipeFormActivity.putExtra("recipe", selectedRecipe);
-
-                startActivity(goToRecipeFormActivity);
+                Recipe selectedRecipe = (Recipe) parent.getItemAtPosition(position);
+                openEditForm(selectedRecipe);
             }
         });
+    }
 
+    private void openEditForm(Recipe recipe) {
+        Intent goToRecipeFormActivity = new Intent(RecipeListActivity.this, RecipeFormActivity.class);
+        goToRecipeFormActivity.putExtra(RECIPE_KEY, recipe);
+
+        startActivity(goToRecipeFormActivity);
+    }
+
+    private void configureAdapter(ListView recipeListView, List<Recipe> recipes) {
+        recipeListView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recipes));
     }
 }
