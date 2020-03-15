@@ -5,13 +5,27 @@ import androidx.annotation.NonNull;
 import java.io.Serializable;
 
 public class Recipe implements Serializable {
-    private final String recipeName;
-    private final String recipeNumberOfIngredients;
-    private final String recipeNumberOfSteps;
+    private int id = 0;
+    private String recipeName;
+    private String recipeNumberOfIngredients;
+    private String recipeNumberOfSteps;
 
     public Recipe(String recipeName, String recipeNumberOfIngredients, String recipeNumberOfSteps) {
         this.recipeName = recipeName;
         this.recipeNumberOfIngredients = recipeNumberOfIngredients;
+        this.recipeNumberOfSteps = recipeNumberOfSteps;
+        this.id = id;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+    public void setRecipeNumberOfIngredients(String recipeNumberOfIngredients) {
+        this.recipeNumberOfIngredients = recipeNumberOfIngredients;
+    }
+
+    public void setRecipeNumberOfSteps(String recipeNumberOfSteps) {
         this.recipeNumberOfSteps = recipeNumberOfSteps;
     }
 
@@ -31,5 +45,13 @@ public class Recipe implements Serializable {
     @Override
     public String toString() {
         return recipeName;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

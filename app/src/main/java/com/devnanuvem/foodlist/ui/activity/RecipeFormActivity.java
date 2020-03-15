@@ -18,6 +18,7 @@ public class RecipeFormActivity extends AppCompatActivity {
     private EditText recipeNumberOfIngredientsField;
     private EditText recipeNumberOfStepsField;
     private final RecipeDAO recipeDAO = new RecipeDAO();
+    private Recipe recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class RecipeFormActivity extends AppCompatActivity {
 
         saveButtonSetting();
 
-        Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+        recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         recipeNameField.setText(recipe.getRecipeName());
         recipeNumberOfIngredientsField.setText(recipe.getRecipeNumberOfIngredients());
         recipeNumberOfStepsField.setText(recipe.getRecipeNumberOfSteps());
@@ -39,10 +40,10 @@ public class RecipeFormActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Recipe recipe = createRecipe();
-
-                saveRecipe(recipe);
+        fillRecipeForm();
+        recipeDAO.editRecipe(recipe);
+        finish();
+//                saveRecipe(recipe);
 
             }
         });
@@ -61,11 +62,14 @@ public class RecipeFormActivity extends AppCompatActivity {
         finish();
     }
 
-    private Recipe createRecipe() {
+    private void fillRecipeForm() {
         String recipeName = recipeNameField.getText().toString();
         String recipeNumberOfIngredients = recipeNumberOfIngredientsField.getText().toString();
         String recipeNumberOfSteps = recipeNumberOfStepsField.getText().toString();
 
-        return new Recipe(recipeName, recipeNumberOfIngredients, recipeNumberOfSteps);
+        recipe.setRecipeName(recipeName);
+        recipe.setRecipeNumberOfIngredients(recipeNumberOfIngredients);
+        recipe.setRecipeNumberOfSteps(recipeNumberOfSteps);
+
     }
 }
